@@ -11,10 +11,14 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "blueimp-md5": "^2.10.0",
     "element-ui": "^2.4.1",
     "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
+    "mongoose": "^5.3.0",
     "vue": "^2.5.2",
+    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

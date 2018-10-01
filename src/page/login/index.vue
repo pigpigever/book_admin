@@ -3,9 +3,9 @@
 		<div class="login-box">
 			<h1>书悦管理系统</h1>
 			<div class="form">
-				<input type="text" placeholder="用户名">
-				<input type="text" placeholder="密码">
-				<button type="submit" id="login-button">登录</button>
+				<input type="text" placeholder="用户名" @input="getUserName">
+				<input type="text" placeholder="密码" @input="getPassword">
+				<button type="submit" id="login-button" @click="logIn">登录</button>
 			</div>
 		</div>
 		<bg-bubbles></bg-bubbles>
@@ -14,17 +14,36 @@
 
 <script>
 import bgBubbles from '@/components/common/bg_bubbles'
+import logInOrSignUp from '@/mixins'
+
 export default {
 	name      : 'login_page',
+	mixins    : [logInOrSignUp],
 	components: {
 		bgBubbles
 	},
-	data () {
-		return {
-			input: ''
-		}
-	},
 	methods: {
+		/**
+		 * 触发登录事件
+		 * @param void
+		 * @return void
+		 */
+		logIn () {
+			console.log('login')
+			if (this.isCanLogin) {
+				// 请求接口进行登录
+				console.log('isCanLogin')
+				this.$http.post('/api/logIn').then(({data: {code, msg, data}}) => {
+					if (code === 0) {
+						console.log('登录成功！！！')
+						alert('登录成功！！！')
+					}
+				}).catch((err) => {
+					throw err
+				})
+			}
+			return false
+		}
 	}
 }
 </script>
