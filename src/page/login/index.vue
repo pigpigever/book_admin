@@ -1,26 +1,19 @@
 <template lang="html">
-	<div class="login">
-		<div class="login-box">
-			<h1>书悦管理系统</h1>
-			<div class="form">
-				<input type="text" placeholder="用户名" @input="getUserName">
-				<input type="text" placeholder="密码" @input="getPassword">
-				<button type="submit" id="login-button" @click="logIn">登录</button>
-			</div>
-		</div>
-		<bg-bubbles></bg-bubbles>
-	</div>
+	<!-- 登录页面 -->
+	<login :type="0">
+		<button type="submit" id="login-button" @click="logIn">登录</button>
+		<p class="tips">还没有账号？<router-link to="/signIn">立即注册！</router-link></p>
+	</login>
 </template>
 
 <script>
-import bgBubbles from '@/components/common/bg_bubbles'
-import logInOrSignUp from '@/mixins'
-
+import { logInOrSignIn } from '@/mixins'
+import login from '@/components/common/login_or_signin'
 export default {
 	name      : 'login_page',
-	mixins    : [logInOrSignUp],
+	mixins    : [logInOrSignIn],
 	components: {
-		bgBubbles
+		login
 	},
 	methods: {
 		/**
@@ -32,10 +25,8 @@ export default {
 			console.log('login')
 			if (this.isCanLogin) {
 				// 请求接口进行登录
-				console.log('isCanLogin')
 				this.$http.post('/api/logIn').then(({data: {code, msg, data}}) => {
 					if (code === 0) {
-						console.log('登录成功！！！')
 						alert('登录成功！！！')
 					}
 				}).catch((err) => {
@@ -47,101 +38,3 @@ export default {
 	}
 }
 </script>
-
-<style lang="less">
-.login {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-	background: #50a3a2;
-	background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
-	.login-box {
-		max-width: 600px;
-		height: 400px;
-		margin: 200px auto;
-		padding: 80px 0;
-		text-align: center;
-		h1 {
-			transition-duration: 1s;
-			transition-timing-function: ease-in-put;
-			font-size: 40px;
-			font-weight: 200;
-		}
-		.form {
-			position: relative;
-			padding: 20px 0;
-			z-index: 2;
-			input {
-				display: block;
-				appearance: none;
-				outline: 0;
-				border: 1px solid fade(white, 40%);
-				background-color: fade(white, 20%);
-				width: 250px;
-				border-radius: 3px;
-				padding: 10px 15px;
-				margin: 0 auto 10px auto;
-				display: block;
-				text-align: center;
-				font-size: 18px;
-				color: white;
-				transition-duration: 0.25s;
-				font-weight: 300;
-
-				&:hover{
-					background-color: fade(white, 40%);
-				}
-
-				&:focus{
-					background-color: white;
-					width: 300px;
-					color: #53e3a6;
-				}
-
-				&::-webkit-input-placeholder { /* WebKit browsers */
-					font-family: 'Source Sans Pro', sans-serif;
-					color:    white;
-					font-weight: 300;
-				}
-				&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-					font-family: 'Source Sans Pro', sans-serif;
-					color: white;
-					opacity:  1;
-					font-weight: 300;
-				}
-				&::-moz-placeholder { /* Mozilla Firefox 19+ */
-					font-family: 'Source Sans Pro', sans-serif;
-					color:    white;
-					opacity:  1;
-					font-weight: 300;
-				}
-				&:-ms-input-placeholder { /* Internet Explorer 10+ */
-					font-family: 'Source Sans Pro', sans-serif;
-					color:    white;
-					font-weight: 300;
-				}
-			}
-			button {
-				appearance: none;
-				outline: 0;
-				background-color: white;
-				border: 0;
-				padding: 10px 15px;
-				color: #53e3a6;
-				border-radius: 3px;
-				width: 250px;
-				cursor: pointer;
-				font-size: 18px;
-				transition-duration: 0.25s;
-				&:hover{
-					background-color: rgb(245, 247, 249);
-				}
-			}
-		}
-	}
-}
-</style>

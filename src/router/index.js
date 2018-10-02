@@ -17,7 +17,7 @@ export default new Router({
 		},
 		{
 			name     : 'signin_page',
-			path     : '/signin',
+			path     : '/signIn',
 			component: () => import('@/page/signin')
 		}
 	]

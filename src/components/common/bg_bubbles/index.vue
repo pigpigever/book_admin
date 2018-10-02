@@ -1,4 +1,5 @@
 <template lang="html">
+	<!-- 泡泡组件 -->
 	<div class="bg-bubbles">
 		<li></li>
 		<li></li>

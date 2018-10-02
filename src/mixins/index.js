@@ -1,4 +1,4 @@
-import logInOrSignUp from './login_or_signup'
-export default {
-	logInOrSignUp
+import logInOrSignIn from './login_or_signin'
+export {
+	logInOrSignIn
 }
