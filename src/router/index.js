@@ -12,7 +12,7 @@ export default new Router({
 		},
 		{
 			name     : 'login_page',
-			path     : '/login',
+			path     : '/logIn',
 			component: () => import('@/page/login')
 		},
 		{
