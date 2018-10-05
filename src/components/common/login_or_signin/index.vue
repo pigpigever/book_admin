@@ -33,43 +33,35 @@
   </div>
 </template>
 
-<script>
-/* eslint-disable no-mixed-spaces-and-tabs */
+<script lang="ts">
+import bgBubbles from '@/components/common/bg_bubbles/index.vue'
+import { logInOrSignIn } from '@/mixins'
+import { Prop, Component, Mixins } from 'vue-property-decorator'
 
-import bgBubbles from '@/components/common/bg_bubbles'
-import {logInOrSignIn} from '@/mixins'
-
-export default {
-	name      : 'login_or_signin',
+@Component({
 	components: {
 		bgBubbles
-	},
-	props: {
-		type: {
-			type    : Number,
-			default : 0,
-			required: true
+	}
+})
+export default class LogInOrSignIn extends Mixins(logInOrSignIn) {
+	@Prop(Number) type: number
+
+	/**
+	 * 根据不同的type返回不同的class，其中
+	 * type：0 对应的是登录页面
+	 * type：1 对应的是注册页面
+	*/
+	get componentStatus () {
+		if (this.type === 0) {
+			return 'login'
 		}
-	},
-	mixins  : [logInOrSignIn],
-	computed: {
-		/**
-		 * 根据不同的type返回不同的class，其中
-		 * type：0 对应的是登录页面
-		 * type：1 对应的是注册页面
-		*/
-		componentStatus () {
-			if (this.type === 0) {
-				return 'login'
-			}
-			return 'signin'
-		},
-		isLogin: function () {
-			if (this.type === 0) {
-				return true
-			}
-			return false
+		return 'signin'
+	}
+	get isLogin () {
+		if (this.type === 0) {
+			return true
 		}
+		return false
 	}
 }
 </script>

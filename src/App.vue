@@ -1,16 +1,16 @@
-<template>
+<template lang="html">
 	<div id="app">
 		<router-view/>
 	</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'App'
 }
 </script>
 
-<style>
+<style lang="less">
 html, body, #app {
 	width: 100%;
 	height: 100%;
