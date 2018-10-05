@@ -83,7 +83,7 @@ export default {
 					password: this.password
 				}
 				const control = {
-					emulateJSON : true
+					emulateJSON: true
 				}
 				this.$http.post('/api/signIn', params, control).then(({data: {code, msg, data}}) => {
 					if (code === 0) {

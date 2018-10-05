@@ -1,12 +1,10 @@
 const Router = require('koa-router')()
 const MD5 = require('blueimp-md5')
 const Mongoose = require('mongoose')
-const { hasUserInfo } = require('../utils')
+const Utils = require('../utils')
 const { userModel } = require('../db')
 
-
-Mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-
+/** 登录 */
 Router.post('/logIn', async (ctx, next) => {
     const user = new userModel({
         name: 'tonychen',
@@ -24,20 +22,24 @@ Router.post('/logIn', async (ctx, next) => {
     })
 })
 
+/** 注册 */
 Router.post('/signIn', async (ctx, next) => {
     const {name, password} = ctx.request.body
     let user = new userModel({
         name,
         password
     })
-    user.save((err, product) => {
-        if (err) {
-            throw err
+
+    await Utils.hasUserInfo(name).then((type) => {
+        if (type) {
+            user.save()
         }
         ctx.body = {
-            code: 0,
-            text: '啦啦啦'
+            code: type ? 0 : -1,
+            msg : type ? '注册成功' : '注册失败'
         }
+    }).catch((err) => {
+        throw err
     })
 })
 
