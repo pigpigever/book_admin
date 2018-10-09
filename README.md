@@ -13,7 +13,7 @@ npm install  or  npm i
 
 # 启动项目
 在项目根目录下执行 npm run dev 可以把前端代码跑起来
-然后进入server目录下执行 node index.js 可以把后段代码也跑起来
+然后进入server目录下执行 node index.js 可以把后端代码也跑起来
 前后端代码一起运行，那可以把项目完整的跑起来了
 
 # 打包项目
